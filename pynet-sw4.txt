@@ -1,0 +1,87 @@
+ 
+! Command:  ning-config
+! Time: Wed Sep 30 11:18:27 2009
+! device: pynet-sw4 (vEOS, EOS-4.12.1-1356975.vEOS4123 (engineering build))
+!
+! boot system flash:/vEOS.swi
+!
+logging buffered 20010
+no logging console
+!
+hostname pynet-sw4
+!
+spanning-tree mode mstp
+!
+no aaa root
+!
+username admin privilege 15 role network-admin secret 5 $1$eJAZVkxj$Btdhf.8rXwlSNUBhIkfKq.
+username admin1 privilege 15 secret 5 $1$DFO8vppP$bxmyesWwD7WyU2nqMnQiP1
+username eapi secret 5 $1$xmBWq58Y$awwxXC5XsKcVT5Q95QiJ5.
+!
+vlan 16
+   name red
+!
+vlan 17,335
+!
+vlan 401
+   name FOURZEROONE
+!
+vlan 501
+   name FIVEZEROONE
+!
+vlan 607
+!
+vlan 651
+   name KM651
+!
+vlan 652
+   name KM652
+!
+vlan 653
+   name KM653
+!
+vlan 777
+   name red
+!
+vlan 778
+   name orange
+!
+vlan 779
+   name Vlan779
+!
+vlan 982
+!
+interface Ethernet1
+   spanning-tree portfast
+!
+interface Ethernet2
+   no switchport
+!
+interface Ethernet3
+!
+interface Ethernet4
+   switchport access vlan 430
+!
+interface Ethernet5
+   switchport trunk allowed vlan none
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Management1
+   shutdown
+!
+interface Vlan1
+   ip address 10.220.88.31/24
+!
+ip route 0.0.0.0/0 10.220.88.1
+!
+ip routing
+!
+management api http-commands
+   no shutdown
+!
+!
+end
+pynet-sw4#
