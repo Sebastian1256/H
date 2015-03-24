@@ -1,0 +1,98 @@
+ 
+! Command:  ning-config
+! Time: Wed Sep 30 11:29:33 2009
+! device: pynet-sw3 (vEOS, EOS-4.12.1-1356975.vEOS4123 (engineering build))
+!
+! boot system flash:/vEOS.swi
+!
+hostname pynet-sw3
+!
+spanning-tree mode mstp
+!
+no aaa root
+!
+username admin privilege 15 role network-admin secret 5 $1$eJAZVkxj$Btdhf.8rXwlSNUBhIkfKq.
+username admin1 privilege 15 secret 5 $1$Xus7H3fv$JzwEuYRvXv0aEAttV5z8Z/
+username eapi secret 5 $1$LpMIlinC$tRlRtRFRBVBF/gGEeRWkv1
+!
+vlan 221
+   name kb1
+!
+vlan 222
+   name kb2
+!
+vlan 223
+   name kb3
+!
+vlan 225
+   name green
+!
+vlan 226
+   name black
+!
+vlan 227
+   name orange
+!
+vlan 521
+   name bike
+!
+vlan 701
+!
+vlan 702
+   name animal
+!
+vlan 703
+   name tiger
+!
+vlan 903
+   name Leche
+!
+vlan 908
+   name EIGHT
+!
+vlan 909
+   name GreenLantern
+!
+interface Port-Channel1
+   description LAG Interface,
+!
+interface Ethernet1
+   spanning-tree portfast
+!
+interface Ethernet2
+!
+interface Ethernet3
+   switchport trunk native vlan 100
+   channel-group 1 mode active
+!
+interface Ethernet4
+   channel-group 1 mode active
+!
+interface Ethernet5
+!
+interface Ethernet6
+!
+interface Ethernet7
+   description *** IN USE ***
+   switchport access vlan 222
+   switchport trunk allowed vlan 221-223
+   switchport mode trunk
+!
+interface Management1
+   shutdown
+!
+interface Vlan1
+   ip address 10.220.88.30/24
+!
+interface Vlan704
+!
+ip route 0.0.0.0/0 10.220.88.1
+!
+ip routing
+!
+management api http-commands
+   no shutdown
+!
+!
+end
+pynet-sw3#
